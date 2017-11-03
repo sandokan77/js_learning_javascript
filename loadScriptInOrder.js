@@ -1,4 +1,4 @@
-var scriptMap =["https://code.jquery.com/jquery-2.1.1.min.js","https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.11.5/paper-full.min.js","main.js"];
+var scriptMap =["variables.js","https://code.jquery.com/jquery-2.1.1.min.js","https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.11.5/paper-full.min.js","main.js"];
 
 var order = 0;
 
