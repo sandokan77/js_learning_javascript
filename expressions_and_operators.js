@@ -81,3 +81,35 @@ a != b; // true; not recommended
 5 < 5; // false
 5 <= 5; // true
 
+//Comparing numbers
+
+//this will not stop at 0.3 since 0.1 + 0.1 + 0.1 = 0.30000000000000004
+let n = 0;
+while(true) {
+n += 0.1;
+if(n === 0.3) break;
+}
+console.log(`Stopped at ${n}`); 
+
+//this will stop at 0.3
+let n = 0;
+while(true) {
+n += 0.1;
+if(Math.abs(n - 0.3) < Number.EPSILON) break;
+}
+console.log(`Stopped at ${n}`);
+
+//String concatenation
+3 + 5 + "8" // evaluates to string "88"
+"3" + 5 + 8 // evaluates to string "358"
+
+//Logical Operators !, ||, &&
+const doIt = false;
+const result = doIt ? "Did it!" : "Didn't do it.";
+
+//Comma Operator
+let x = 0, y = 10, z;
+z = (x++, y++); //z will be the value of y++ which 10
+
+//Biwise operators
+@todo
