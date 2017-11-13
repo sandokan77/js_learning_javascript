@@ -92,5 +92,110 @@ function f(x) {
     before calling f: o.message="initial value"
     inside f: o.message="new object!" (after assignment)
 
-    // JavaScript makes no such distinction, and when you have a function named f, you can call it with 0 or 1 or 10 arguments, and you’re calling the same function.
+    //Function signatures: JavaScript makes no distinction, when you have a function named f, you can call it with 0 or 1 or 10 arguments, and you’re calling the same function.
     
+    //Destructuring Arguments    
+    function getSentence({ subject, verb, object }) {
+        return `${subject} ${verb} ${object}`; //destructuring an object into individual variables
+        }
+    const o = { subject: "I", verb: "love", object: "JavaScript",}; //the object itself
+        
+    getSentence(o); // "I love JavaScript"
+
+    //Destructuring Arrays
+    function getSentence([ subject, verb, object ]) {
+        return `${subject} ${verb} ${object}`;
+        }
+    const arr = [ "I", "love", "JavaScript" ];
+    getSentence(arr); // "I love JavaScript"
+
+    //The "spread" operator
+
+    function addPrefix(prefix, ...words) { //prefix will be "con" , words will be "verse, vex"
+        // we will learn a better way to do this later!
+        const prefixedWords = [];
+        for(let i=0; i<words.length; i++) {
+        prefixedWords[i] = prefix + words[i];
+        }
+        return prefixedWords;    
+    }
+
+    addPrefix("con", "verse", "vex"); // ["converse", "convex"]
+    
+    //Default Arguments (ES6)
+    //when values for arguments aren’t provided, they get a value of undefined.
+    function f(a, b = "default", c = 3) {
+        return `${a} - ${b} - ${c}`;
+        }
+    f(5, 6, 7); // "5 - 6 - 7"
+    f(5, 6); // "5 - 6 - 3"
+    f(5); // "5 - default - 3"
+    f(); // "undefined - default - 3"
+    
+    //Functions as Properties of Objects
+    const o = {
+        name: 'Wallace', // primitive property
+        bark: function() { return 'Woof!'; }, // function property (method)
+        }
+    
+    //ES6 has a shorthand for methods:
+    const o = {
+        name: 'Wallace', // primitive property
+        bark() { return 'Woof!'; }, // function property (method)
+        }
+    
+    //The "this" keyword
+    //JavaScript, it can be used in multiple ways
+    
+    //The this keyword takes on the value of the specific object it was called on
+    //This is bound to o not because speak is a property of o, but because we called it directly on o (o.speak):
+    
+    const o = {
+        name: 'Wallace',
+        speak() { return `My name is ${this.name}!`; },
+        }
+    
+    o.speak(); // "My name is Wallace!
+
+    
+    //what happens if we assign that same function to a variable?:
+    const speak = o.speak;
+    speak === o.speak; // true; both variables refer to the same function
+    speak(); // "My name is !"
+    
+    //Accessing "this" in a nested function:
+    const o = {
+        name: 'Julie',
+        greetBackwards: function() {
+            function getReverseName() { //nested functions
+                let nameBackwards = '';
+                for(let i=this.name.length-1; i>=0; i--) {
+                nameBackwards += this.name[i];
+                }
+                return nameBackwards;
+            }
+        return `${getReverseName()} si eman ym ,olleH`;
+        },
+        };
+        o.greetBackwards();
+
+        
+        const o = {
+            name: 'Julie',
+            func_top_level: function() {
+                function func_nested() { //nested functions
+                    console.log("func_nested() is referring to an object like:"+Object.getOwnPropertyDescriptor(this));
+                    return;
+                }
+            console.log("func_top_level() is referring to an object like:"+Object.getOwnPropertyDescriptor(this));
+            return;
+            },
+            };
+    
+        o.func_top_level(); //somehow func_nested() is not executed, to be investigated
+
+    //Function Expressions and Anonymous Functions        
+    
+
+    
+
