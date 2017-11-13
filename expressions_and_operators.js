@@ -112,4 +112,128 @@ let x = 0, y = 10, z;
 z = (x++, y++); //z will be the value of y++ which 10
 
 //Biwise operators
-@todo
+/*
+Bitwise operators deal with their operands as 32-bit signed integers in 2 complement format. 
+Because all numbers in JavaScript are doubles, JavaScript converts the numbers to 32-bit integers 
+before performing bitwise operators, and then converts them back to doubles before returning the result.
+*/
+
+& Bitwise AND 0b1010 & 0b1100 // result: 0b1000
+| Bitwise OR 0b1010 | 0b1100 // result: 0b1110
+^ Bitwise XOR 0b1010 ^ 0b1100 // result: 0b0110
+~ Bitwise NOT ~0b1010 // result: 0b0101
+<< Left shift 0b1010 << 1 // result: 0b10100
+0b1010 << 2 // result: 0b101000
+>> Sign-propagating right shift (See below)
+>>> Zero-fill right shift (See below)
+
+let n = 22 // 32-bit binary: 00000000000000000000000000010110
+n >> 1 // 00000000000000000000000000001011
+n >>> 1 // 00000000000000000000000000001011
+n = ~n // one's complement: 11111111111111111111111111101001
+n++ // two's complement: 11111111111111111111111111101010
+n >> 1 // 11111111111111111111111111110101
+n >>> 1 // 01111111111111111111111111110101
+
+//Real life example:
+const FLAG_EXECUTE = 1 // 0b001
+const FLAG_WRITE = 2 // 0b010
+const FLAG_READ = 4 // 0b100
+
+let p = FLAG_READ | FLAG_WRITE; // 0b110
+let hasWrite = p & FLAG_WRITE; // 0b010 - truthy
+let hasExecute = p & FLAG_EXECUTE; // 0b000 - falsy
+p = p ^ FLAG_WRITE; // 0b100 -- toggle write flag (now off)
+p = p ^ FLAG_WRITE;
+
+// we can even determine multiple flags in one expression:
+const hasReadOrExecute = p & (FLAG_READ | FLAG_EXECUTE);
+const hasReadAndExecute = p & (FLAG_READ | FLAG_EXECUTE) === FLAG_READ | FLAG_EXECUTE;
+
+//typeof operator
+typeof undefined //"undefined"
+typeof null "object" //Unfortunate, but true
+typeof {} //"object"
+typeof true //"boolean"
+typeof 1 //"number"
+typeof "" //"string"
+typeof Symbol() //"symbol" New in ES6
+typeof function() {} //"function"
+
+//void operator
+/*The void operator has only one job: to evaluate its operand and then return
+undefined. Sound useless? It is.*/
+
+<a href="javascript:void 0">Do nothing.</a> <!-- not recommended />
+
+//assignment operators: it assigns a value to a variable.
+
+x += y //x = x + y
+x -= y //x = x - y
+x *= y //x = x * y
+x /= y //x = x / y
+x %= y //x = x % y
+x <<= y //x = x << y
+x >>= y //x = x >> y
+x >>>= y //x = x >>> y
+x &= y //x = x & y
+x |= y //x = x | y
+x ^= y //x = x ^ y
+
+//destructuring assignment operation
+
+//destructuring object:
+
+// a normal object
+const obj = { b: 2, c: 3, d: 4 };
+
+// object destructuring assignment
+const {a, b, c} = obj;
+a; // undefined: there was no property "a" in obj
+b; // 2
+c; // 3
+d; // reference error: "d" is not defined
+
+//destructuring array:
+
+// a normal array
+const arr = [1, 2, 3];
+// array destructuring assignment
+let [x, y] = arr;
+x; // 1
+y; // 2
+z; // error: z hasn't been defined
+
+//thera are more element in the array than variables to assign
+const arr = [1, 2, 3, 4, 5];
+let [x, y, ...rest] = arr;
+x; // 1
+y; // 2
+rest; // [3, 4, 5] //not mandatory to call it "rest"
+
+//Object and Array Operators
+. //Member access
+[] //Computed member access
+in //Property existence operator
+new Object //instantiation operator
+instanceof //Prototype chain test operator
+... //Spread operator
+delete //Delete operator
+
+//Expressions in Template Strings
+const roomTempC = 21.5;
+let currentTempC = 19.5;
+const message = `The current temperature is ` + `${currentTempC-roomTempC}\u00b0C different than room temperature.`;
+const fahrenheit = `The current temperature is ${currentTempC * 9/5 + 32}\u00b0F`;
+
+//Expressions and Control Flow Patterns
+//1.Converting if...else Statements to Conditional Expressions:
+if(isPrime(n)) {
+    label = 'prime';
+} else {
+    label = 'non-prime';
+}
+ //would be better written as:
+label = isPrime(n) ? 'prime' : 'non-prime';
+
+
