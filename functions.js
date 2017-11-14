@@ -283,3 +283,12 @@ function f(x) {
     updateBruce1949("singer, songwriter");
     // bruce is now { name: "Bruce", birthYear: 1949,
     // occupation: "singer, songwriter" }
+
+/* 
+when you create a function inside an object, it won't belond to that object so you bind it.. but saying
+*/
+
+myfunction.bind(this) //- inside the object or you could use the arrow function
+()=>{
+	console.log('hello world')
+}

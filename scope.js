@@ -115,6 +115,101 @@ let f; // undefined function
 let oRef = f();
 oRef.note = "Not so safe after all!";
 
-//Immediately Invoked Function Expressions
+//Immediately Invoked Function Expressions IIFE
+//An IIFE declares a function and then runs it immediately.
+
+(function() {
+    console.log("invoked");
+    })();
+
+//We create an anonymous function using a function expression, and then immediately call (invoke) that function:
+const message = (function() {
+        const secret = "I'm a secret!";
+        return `The secret is ${secret.length} characters long.`;
+    })();
+console.log(message);
+
+//Consider a function that can report the number of times it’s been called in a way that can’t be tampered with:
+const f = (function() {
+    let count = 0;
+    return function() {
+            return `I have been called ${++count} time(s).`;
+        }
+    })();
+f(); // "I have been called 1 time(s)."
+f(); // "I have been called 2 time(s)."
+
+//Variable Hoisting
+/* 
+When you declare a variable with let, it doesn’t spring into existence until you
+declare it. When you declare a variable with var, it’s available everywhere in the current
+scope…even before it’s declared.
+*/
+
+let var1;
+let var2 = undefined;
+var1; // undefined
+var2; // undefined
+undefinedVar; // ReferenceError: notDefined is not defined
+
+//With let, you will get an error if you try to use a variable before it’s been declared:
+x; // ReferenceError: x is not defined
+let x = 3; // we'll never get here -- the error stops execution
+
+//Variables declared with var, on the other hand, can be referenced before they’re declared:
+x; // undefined
+var x = 3;
+x; // 3
+
+/* Variables declared with var employ a mechanism called hoisting. JavaScript scans the entire scope (either a function or the global
+scope), and any variables declared with var are hoisted to the top. */
+
+//Function Hoisting
+
+/*Like variables declared with var, function declarations are hoisted to the top of their
+scope, allowing you to call functions before they’re declared:*/
+f(); // logs "f"
+function f() {
+    console.log('f');
+}
+
+//Using "let":
+f(); // TypeError: f is not a function
+let f = function() {
+    console.log('f');
+}
+
+//The Temporal Dead Zone (typeof):
+
+//this code was safe in the pre-let Javascript era:
+if(typeof x === "undefined") {
+    console.log("x doesn't exist or is undefined");
+    } else {
+    // safe to refer to x....
+    }
+
+//no longer safe for variables declared with let:
+if(typeof x === "undefined") {
+    console.log("x doesn't exist or is undefined");
+    } else {
+    // safe to refer to x....
+    }
+let x = 5;
+
+//Strict Mode: "use strict" in global scope the entire script will execute in strict mode. 
+//If you do this in a function the function will execute in strict mode.
+
+(function() {
+    'use strict';
+    // all of your code goes here...it
+    // is executed in strict mode, but
+    // the strict mode won't contaminate
+    // any other scripts that are combined
+    // with this one
+    })();
+
+    
+
+
 
 
