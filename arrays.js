@@ -52,4 +52,18 @@ arr.unshift("a"); // returns 4; arr is now ["a", "b", "c", "d"]
 arr.shift(); // returns "a"; arr is now ["b", "c", "d"]
 
 //Adding Multiple Elements at the End
+//concat
+const arr = [1, 2, 3];
+arr.concat(4, 5, 6); // returns [1, 2, 3, 4, 5, 6]; arr unmodified
+arr.concat([4, 5, 6]); // returns [1, 2, 3, 4, 5, 6]; arr unmodified
+arr.concat([4, 5], 6); // returns [1, 2, 3, 4, 5, 6]; arr unmodified
+arr.concat([4, [5, 6]]); // returns [1, 2, 3, 4, [5, 6]]; arr unmodified
+
+//Getting a Subarray
+const arr = [1, 2, 3, 4, 5];
+arr.slice(3); // returns [4, 5]; arr unmodified
+arr.slice(2, 4); // returns [3, 4]; arr unmodified
+arr.slice(-2); // returns [4, 5]; arr unmodified
+arr.slice(1, -2); // returns [2, 3]; arr unmodified
+arr.slice(-2, -1); // returns [4]; arr unmodified
 
