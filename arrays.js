@@ -67,4 +67,17 @@ arr.slice(-2); // returns [4, 5]; arr unmodified
 arr.slice(1, -2); // returns [2, 3]; arr unmodified
 arr.slice(-2, -1); // returns [4]; arr unmodified
 
-//###marker change only
+//Adding or Removing Elements at Any Position
+const arr = [1, 5, 7];
+//splice (
+//1. the index you want to start modifying, (new elements will start at this position)
+//2. the number of elements to remove (use 0 if you don’t want to remove any elements), 
+//3. the remaining arguments are the elements to be added
+//returns: the removed elements
+
+arr.splice(1, 0, 2, 3, 4); // returns []; arr is now [1, 2, 3, 4, 5, 7]
+arr.splice(5, 0, 6); // returns []; arr is now [1, 2, 3, 4, 5, 6, 7]
+arr.splice(1, 2); // returns [2, 3]; arr is now [1, 4, 5, 6, 7]
+arr.splice(2, 1, 'a', 'b'); // returns [5]; arr is now [1, 4, 'a', 'b', 6, 7]
+
+//Cutting and Replacing Within an Array
