@@ -120,4 +120,72 @@ car1.shift('d');
 car1.userGear; // 'D'
 
 //Static Methods
+class Car {
+    static getNextVin() {
+        return Car.nextVin++; // we could also use this.nextVin++
+        // but referring to Car emphasizes
+        // that this is a static method
+    }
+    constructor(make, model) {
+        this.make = make;
+        this.model = model;
+        this.vin = Car.getNextVin();
+    }
+    static areSimilar(car1, car2) {
+        return car1.make===car2.make && car1.model===car2.model;
+    }
+    static areSame(car1, car2) {
+        return car1.vin===car2.vin;
+    }
+}
+Car.nextVin = 0;
+const car1 = new Car("Tesla", "S");
+const car2 = new Car("Mazda", "3");
+const car3 = new Car("Mazda", "3");
+car1.vin; // 0
+car2.vin; // 1
+car3.vin // 2
+Car.areSimilar(car1, car2); // false
+Car.areSimilar(car2, car3); // true
+Car.areSame(car2, car3); // false
+Car.areSame(car2, car2); // true
 
+//Inheritance
+/*
+if a method is not found on an object's prototype, it
+checks the prototype's prototype. In this way, a prototype chain is established. Java
+Script will walk up the prototype chain until it finds a prototype that satisfies the
+request. If it can find no such prototype, it will finally error out.
+*/
+
+class Vehicle {
+    constructor() {
+        this.passengers = [];
+        console.log("Vehicle created");
+    }
+    addPassenger(p) {
+        this.passengers.push(p);
+    }
+}
+class Car extends Vehicle {
+    constructor() {
+        super();
+        console.log("Car created");
+    }
+    deployAirbags() {
+        console.log("BWOOSH!");
+    }
+}
+
+const v = new Vehicle();
+v.addPassenger("Frank");
+v.addPassenger("Judy");
+v.passengers; // ["Frank", "Judy"]
+const c = new Car();
+c.addPassenger("Alice");
+c.addPassenger("Cameron");
+c.passengers; // ["Alice", "Cameron"]
+v.deployAirbags(); // error
+c.deployAirbags(); // "BWOOSH!"
+
+//Polymorphism
