@@ -220,10 +220,71 @@ class BaseClass {
     
     //to get: 
     bc1.prop1;
-    
-    
-
 
 //Polymorphism
+//Defining the base class
+class BaseClass {
+    
+        constructor() {
+            this.prop1 = "value1";
+            this.prop2 = "value2";
+        }
+    
+        get prop1() {return this._prop1;}
+        set prop1(value) {this._prop1 = value;}
+    
+        get prop2() {return this._prop2;}    
+        set prop2(value) {this._prop2 = value;}
+    }
+
+    
+    const bc1 = new BaseClass();
+    
+    //to set: notice both the setter & getter will act as if they were "normal" properties:
+    bc1.prop1 = "value12";
+    
+    //to get: 
+    bc1.prop1;
 
 
+
+
+//Going forward with extending the base class
+
+    class Child1 extends BaseClass {
+
+        constructor() {
+            super();
+            this.prop1 = "value1.1"
+            this.prop2 = "value2.1"
+        }
+
+        get prop1() {return this._prop1;}
+        set prop1(value) {this._prop1 = value;}
+    
+        get prop2() {return this._prop2;}    
+        set prop2(value) {this._prop2 = value;}
+}    
+
+
+const c1 = new Child1();
+
+c1 instanceof Child1; //true
+c1 instanceof BaseClass; //true
+c1 instanceof BaseClass2; //VM2071:1 Uncaught ReferenceError: BaseClass2 is not defined at <anonymous>:1:15
+
+//Inheritance
+/* All objects in JavaScript are instances of the root class Object. That
+is, for any object o, o instanceof Object will be true (unless you
+explicitly set its __proto__ property, which you should avoid).*/
+
+class Motorcycle extends Vehicle {}
+const c = new Car();
+const m = new Motorcyle();
+c instanceof Car; // true
+c instanceof Vehicle; // true
+m instanceof Car; // false
+m instanceof Motorcycle; // true
+m instanceof Vehicle; // true
+
+//Enumerating Object Properties, Revisited
