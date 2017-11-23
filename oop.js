@@ -65,20 +65,25 @@ car2.userGear // "R"
 
 const Car = (function() { //this is an "object constructor"
     const carProps = new WeakMap();
+
     class Car {
-    constructor(make, model) {
-    this.make = make;
-    this.model = model;
-    this._userGears = ['P', 'N', 'R', 'D'];
-    carProps.set(this, { userGear: this._userGears[0] });
-    }
-    get userGear() { return carProps.get(this).userGear; }
-    set userGear(value) {
-    if(this._userGears.indexOf(value) < 0)
-    throw new Error(`Invalid gear: ${value}`);
-    carProps.get(this).userGear = value;
-    }
-    shift(gear) { this.userGear = gear; }
+        constructor(make, model) {
+            this.make = make;
+            this.model = model;
+            this._userGears = ['P', 'N', 'R', 'D'];
+            carProps.set(this, { userGear: this._userGears[0] });
+        }
+        
+        get userGear() { return carProps.get(this).userGear; }
+        
+        set userGear(value) {
+            if(this._userGears.indexOf(value) < 0)
+            throw new Error(`Invalid gear: ${value}`);
+            carProps.get(this).userGear = value;
+        }
+        
+        shift(gear) { this.userGear = gear; }
+        
     }
     return Car;
     })();
@@ -188,4 +193,37 @@ c.passengers; // ["Alice", "Cameron"]
 v.deployAirbags(); // error
 c.deployAirbags(); // "BWOOSH!"
 
+//Getter and setter
+//We are using "internal" properties, prefixed with "_" to "protect" them: i.e. _prop1
+//Getter and Setter will be generated to use the internal properties
+
+
+class BaseClass {
+    
+        constructor() {
+            this.prop1 = "value1";
+            this.prop2 = "value2";
+        }
+    
+        get prop1() {return this._prop1;}
+        set prop1(value) {this._prop1 = value;}
+    
+        get prop2() {return this._prop2;}    
+        set prop2(value) {this._prop2 = value;}
+    }
+    
+    
+    const bc1 = new BaseClass();
+    
+    //to set: notice both the setter & getter will act as if they were "normal" properties:
+    bc1.prop1 = "value12";
+    
+    //to get: 
+    bc1.prop1;
+    
+    
+
+
 //Polymorphism
+
+
