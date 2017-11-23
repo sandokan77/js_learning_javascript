@@ -288,3 +288,51 @@ m instanceof Motorcycle; // true
 m instanceof Vehicle; // true
 
 //Enumerating Object Properties, Revisited
+class Super {
+    constructor() {
+        this.name = 'Super';
+        this.isSuper = true;
+    }
+}
+    // this is valid, but not a good idea...
+Super.prototype.sneaky = 'not recommended!';
+
+class Sub extends Super {
+    constructor() {
+        super();
+        this.name = 'Sub';
+        this.isSub = true;
+    }
+}
+
+const obj = new Sub();
+for(let p in obj) {
+    console.log(`${p}: ${obj[p]}` +
+    (obj.hasOwnProperty(p) ? '' : ' (inherited)'));
+}
+
+/*Output:
+name: Sub
+isSuper: true
+isSub: true
+sneaky: not recommended! (inherited)*/
+
+//String Representation
+class Car {
+ //...
+    toString() {
+        return `${this.make} ${this.model}: ${this.vin}`;
+    }
+ //...   
+}
+
+//Multiple Inheritance, Mixins, and Interfaces
+/* The primary mechanism for the problem of multiple inheritance is the concept of the
+mixin. A mixin refers to functionality that’s “mixed in” as needed. */
+class InsurancePolicy() /*<== did not work in Chrome*/  {}
+function makeInsurable(o) {
+    o.addInsurancePolicy = function(p) { this.insurancePolicy = p; }
+    o.getInsurancePolicy = function() { return this.insurancePolicy; }
+    o.isInsured = function() { return !!this.insurancePolicy; }
+}
+
